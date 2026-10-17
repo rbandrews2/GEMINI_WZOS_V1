@@ -1,0 +1,6 @@
+{
+  "name": "Work Zone OS (WZOS)",
+  "description": "Android-first operating system for deskless road work, construction, and traffic control crews by Molecular Project Development LLC.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
