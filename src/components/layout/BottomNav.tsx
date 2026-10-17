@@ -16,11 +16,14 @@ import {
   ShieldCheck,
   Crosshair,
   Video,
+  Download,
 } from 'lucide-react';
+import { PWAInstallModal } from '../pwa/PWAInstallModal';
 
 export const BottomNav: React.FC = () => {
   const { activeTab, setActiveTab, activeEntry, notifications, currentUser } = useApp();
   const [showMoreDrawer, setShowMoreDrawer] = useState(false);
+  const [showPwaModal, setShowPwaModal] = useState(false);
 
   const unreadNotifs = notifications.filter((n) => !n.read).length;
 
@@ -156,6 +159,33 @@ export const BottomNav: React.FC = () => {
                 </button>
               ))}
 
+              {/* Install PWA App Card */}
+              <button
+                onClick={() => {
+                  setShowMoreDrawer(false);
+                  setShowPwaModal(true);
+                }}
+                className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-[#181920] to-[#201d14] border border-amber-500/40 text-left transition-all hover:border-amber-400 cursor-pointer shadow-md"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0">
+                    <Download className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-sm text-white flex items-center gap-2">
+                      <span>Install Work Zone OS App</span>
+                      <span className="px-1.5 py-0.5 text-[9px] font-black rounded bg-amber-400 text-black">
+                        PWA
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-400 mt-0.5">
+                      Fast launch, full offline dead-zone mode & home screen icon
+                    </div>
+                  </div>
+                </div>
+                <span className="text-xs text-amber-400 font-extrabold">Install</span>
+              </button>
+
               {currentUser?.role === 'admin' && (
                 <div className="pt-2">
                   <div className="px-1 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
@@ -175,6 +205,9 @@ export const BottomNav: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* PWA Installation Modal */}
+      <PWAInstallModal isOpen={showPwaModal} onClose={() => setShowPwaModal(false)} />
 
       {/* Main Bottom Nav Bar */}
       <nav

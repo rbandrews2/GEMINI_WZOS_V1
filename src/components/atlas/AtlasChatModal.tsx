@@ -67,6 +67,7 @@ How can I help you on the field today?`,
   if (!isOpen) return null;
 
   const quickPrompts = [
+    'How do severe weather warnings work?',
     'How does GPS geofence arrival detection work?',
     'How do Google Meet team & 1-on-1 meetings work?',
     'How do I clock into Travel Time vs Job Site?',
@@ -312,6 +313,15 @@ How can I help you on the field today?`,
 // Intelligent Guardian fallback logic when network is restricted or API key is pending
 function generateAtlasFallback(userPrompt: string): string {
   const p = userPrompt.toLowerCase();
+
+  if (p.includes('weather') || p.includes('storm') || p.includes('wind') || p.includes('lightning') || p.includes('rain') || p.includes('fog') || p.includes('heat')) {
+    return `Work Zone OS integrates real-time GPS weather monitoring and severe weather warnings directly on the Work Zone Dashboard:
+• Live GPS & Active Site Tracking: Automatically pulls ambient temperature, heat index, wind velocity, max gusts, and precipitation using your device's location.
+• MUTCD & OSHA Hazard Alerts: Triggers audible and visual warnings for High Wind (>30-38 MPH gusts requiring sign stand sandbagging), Severe Lightning (suspending crane/metal barrier ops), Dense Fog (requiring illuminated flagger wands), and High Heat (mandatory hydration rest intervals).
+• Safety Drill Simulator: Use the slider icon on the weather widget to simulate adverse weather conditions (High Wind, Lightning, Dense Fog, Extreme Heat) to test crew emergency preparedness.
+
+For more help you can reach support at 18446857207`;
+  }
 
   if (p.includes('geofence') || p.includes('arrive') || p.includes('arrival') || p.includes('proximity')) {
     return `Work Zone OS features an automated GPS Geofencing utility integrated directly into the Time Clock:

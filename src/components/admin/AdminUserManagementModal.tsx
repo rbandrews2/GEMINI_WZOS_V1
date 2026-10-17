@@ -12,6 +12,8 @@ import {
   X,
   CheckCircle2,
   UserPlus,
+  Send,
+  Bell,
 } from 'lucide-react';
 
 interface AdminUserManagementModalProps {
@@ -23,7 +25,7 @@ export const AdminUserManagementModal: React.FC<AdminUserManagementModalProps> =
   isOpen,
   onClose,
 }) => {
-  const { users, addUser, updateUser, deleteUser, currentUser } = useApp();
+  const { users, addUser, updateUser, deleteUser, currentUser, setActiveTab } = useApp();
 
   const [isAddMode, setIsAddMode] = useState(false);
   const [editingUserId, setEditingUserId] = useState<string | null>(null);
@@ -289,6 +291,17 @@ export const AdminUserManagementModal: React.FC<AdminUserManagementModalProps> =
                 </div>
 
                 <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={() => {
+                      onClose();
+                      setActiveTab('notifications');
+                    }}
+                    className="p-2 rounded-lg bg-orange-600/20 hover:bg-orange-600/30 text-orange-400 border border-orange-600/40 transition-colors"
+                    title={`Send in-app notification to ${u.name}`}
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                  </button>
+
                   <button
                     onClick={() => handleStartEdit(u)}
                     className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"

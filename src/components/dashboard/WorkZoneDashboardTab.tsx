@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { ActiveNavTab } from '../../types';
 import { WorkZoneWeatherWidget } from '../weather/WorkZoneWeatherWidget';
+import { PWAInstallButton } from '../pwa/PWAInstallButton';
 import {
   FileText,
   Zap,
@@ -223,11 +224,14 @@ export const WorkZoneDashboardTab: React.FC<WorkZoneDashboardTabProps> = ({ onOp
           <span className="font-extrabold text-white">Tidewater Field Team</span>
           <span className="text-[#8e929b]">Enterprise edition · synthetic</span>
         </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[11px] text-amber-400 font-bold uppercase tracking-wider">
-            {currentUser?.role === 'admin' ? 'Admin Elevated' : 'Field Operator'}
-          </span>
+        <div className="flex items-center gap-2">
+          <PWAInstallButton variant="compact" />
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[11px] text-amber-400 font-bold uppercase tracking-wider">
+              {currentUser?.role === 'admin' ? 'Admin Elevated' : 'Field Operator'}
+            </span>
+          </div>
         </div>
       </div>
 

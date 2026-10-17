@@ -15,6 +15,7 @@ import { GoogleMeetTab } from './components/meetings/GoogleMeetTab';
 import { AtlasChatModal } from './components/atlas/AtlasChatModal';
 import { AtlasFloatingAssistant } from './components/atlas/AtlasFloatingAssistant';
 import { OfflineFieldBanner } from './components/offline/OfflineFieldBanner';
+import { PWAInstallNudgeBanner } from './components/pwa/PWAInstallNudgeBanner';
 import { LoginView } from './components/auth/LoginView';
 import { AdminUserManagementModal } from './components/admin/AdminUserManagementModal';
 import {
@@ -99,6 +100,9 @@ function MainApp() {
           {/* Top Application Header */}
           <TopHeader onOpenUserManagement={() => setIsUserMgmtOpen(true)} />
 
+          {/* PWA Installation Nudge Banner */}
+          <PWAInstallNudgeBanner />
+
           {/* Offline & Cellular Field Status Banner */}
           <OfflineFieldBanner />
 
@@ -119,6 +123,9 @@ function MainApp() {
         /* EXPANDED DESKTOP / TABLET DASHBOARD MODE (Full 1440px layout) */
         <div className="relative z-10 w-full min-h-screen flex flex-col">
           <TopHeader onOpenUserManagement={() => setIsUserMgmtOpen(true)} />
+
+          {/* PWA Installation Nudge Banner */}
+          <PWAInstallNudgeBanner />
 
           {/* Offline & Cellular Field Status Banner */}
           <OfflineFieldBanner />

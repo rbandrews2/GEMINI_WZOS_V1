@@ -377,46 +377,12 @@ export const FormsHubTab: React.FC = () => {
               })}
             </div>
 
-            {/* Digital Signature Pad */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-slate-200 flex items-center gap-1.5">
-                  <PenTool className="w-3.5 h-3.5 text-orange-400" />
-                  <span>Field Member Digital Signature *</span>
-                </label>
-                <button
-                  type="button"
-                  onClick={clearCanvas}
-                  className="text-[11px] text-slate-400 hover:text-white font-medium"
-                >
-                  Clear Signature
-                </button>
-              </div>
-
-              <div className="relative border-2 border-dashed border-slate-700 rounded-xl bg-slate-900/90 overflow-hidden touch-none h-32 flex items-center justify-center">
-                <canvas
-                  ref={canvasRef}
-                  width={420}
-                  height={128}
-                  onMouseDown={startDrawing}
-                  onMouseMove={draw}
-                  onMouseUp={stopDrawing}
-                  onMouseLeave={stopDrawing}
-                  onTouchStart={startDrawing}
-                  onTouchMove={draw}
-                  onTouchEnd={stopDrawing}
-                  className="w-full h-full cursor-crosshair"
-                />
-                {!hasSignature && (
-                  <span className="absolute pointer-events-none text-xs text-slate-500 font-medium select-none">
-                    Sign with finger or stylus here
-                  </span>
-                )}
-              </div>
-              <p className="text-[10px] text-slate-500">
-                Signing certifies compliance under penalty of MUTCD / Caltrans Title 8 safety guidelines.
-              </p>
-            </div>
+            {/* Digital Touch Gesture Signature Component */}
+            <SignaturePad
+              signerName={currentUser?.name || 'Field Inspector'}
+              onSignatureChange={(dataUrl) => setSignatureData(dataUrl)}
+              required={true}
+            />
 
             {/* Destination Selector */}
             <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">

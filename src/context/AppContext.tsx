@@ -574,7 +574,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [activeSeconds, setActiveSeconds] = useState<number>(0);
-  const [activeTab, setActiveTab] = useState<ActiveNavTab>('dashboard');
+  const [activeTab, setActiveTab] = useState<ActiveNavTab>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab') as ActiveNavTab;
+        const validTabs: ActiveNavTab[] = [
+          'dashboard',
+          'clock',
+          'timesheets',
+          'nav',
+          'jobs',
+          'contacts',
+          'forms',
+          'notifications',
+          'training',
+          'meetings',
+          'atlas',
+        ];
+        if (tabParam && validTabs.includes(tabParam)) {
+          return tabParam;
+        }
+      } catch (e) {
+        console.warn('Failed to parse URL tab param:', e);
+      }
+    }
+    return 'dashboard';
+  });
   const [selectedJobForNav, setSelectedJobForNav] = useState<Job | null>(null);
   const [isAndroidViewFrame, setIsAndroidViewFrame] = useState<boolean>(true);
 

@@ -14,6 +14,8 @@ import {
   Zap,
 } from 'lucide-react';
 
+import { PWAInstallButton } from '../pwa/PWAInstallButton';
+
 interface TopHeaderProps {
   onOpenUserManagement?: () => void;
 }
@@ -45,18 +47,35 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenUserManagement }) =>
   return (
     <header className="sticky top-0 z-40 bg-[#0d0e12]/95 backdrop-blur-md border-b border-[#212328] text-slate-100 px-4 py-3 transition-all">
       <div className="flex items-center justify-between gap-3 max-w-7xl mx-auto">
-        {/* Left: Exact Logo & Lockup from Reference Screenshot */}
+        {/* Left: Official WZOS Logo with Hazard Caution Stripes */}
         <div className="flex items-center gap-3 shrink-0">
-          {/* Orange rounded square with bold black 'W' */}
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-[#ff6700] shadow-lg shadow-orange-600/25 shrink-0">
-            <span className="text-xl font-black text-black select-none tracking-tight">W</span>
+          <div className="relative w-10 h-10 rounded-xl bg-black border border-amber-400/60 shadow-lg shadow-amber-500/10 shrink-0 flex flex-col justify-between p-0.5 overflow-hidden">
+            {/* Top Hazard Stripes */}
+            <div
+              className="h-1.5 w-full rounded-2xs"
+              style={{
+                backgroundImage:
+                  'repeating-linear-gradient(45deg, #FACC15 0, #FACC15 4px, #121316 4px, #121316 8px)',
+              }}
+            />
+            <span className="text-center font-black text-[10px] tracking-tight text-white font-mono leading-none">
+              WZOS
+            </span>
+            {/* Bottom Hazard Stripes */}
+            <div
+              className="h-1.5 w-full rounded-2xs"
+              style={{
+                backgroundImage:
+                  'repeating-linear-gradient(45deg, #FACC15 0, #FACC15 4px, #121316 4px, #121316 8px)',
+              }}
+            />
             {activeEntry && (
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full ring-2 ring-[#0d0e12] animate-pulse" />
             )}
           </div>
           <div className="flex flex-col justify-center">
-            <div className="font-display font-extrabold text-sm sm:text-base tracking-wider text-white uppercase leading-none">
-              WORK ZONE
+            <div className="font-display font-extrabold text-sm sm:text-base tracking-wider text-white uppercase leading-none flex items-center gap-1.5">
+              <span>WORK ZONE OS</span>
             </div>
             <div className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] text-[#8e929b] uppercase leading-none mt-1">
               OPERATING SYSTEM
@@ -108,6 +127,9 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onOpenUserManagement }) =>
               </>
             )}
           </button>
+
+          {/* PWA Install Button */}
+          <PWAInstallButton />
 
           {/* Notifications / Dispatch Messages Button */}
           <button

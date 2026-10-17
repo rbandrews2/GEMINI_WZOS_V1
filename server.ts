@@ -6,6 +6,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Ensure HMR is disabled in AI Studio dev server environment to prevent WebSocket closed errors
+process.env.DISABLE_HMR = 'true';
+
 const app = express();
 const PORT = 3000;
 
@@ -84,6 +87,13 @@ Your Knowledge of Work Zone OS:
    - If the worker is clocked into 'Travel Time', prompts them to switch to 'Job Site' work upon arrival.
    - Includes on-site verification badges and an interactive Field Test Simulator for testing arrivals.
 
+12. Real-Time GPS Weather & Severe Weather Warnings:
+   - Integrated live on the WorkZoneDashboardTab.
+   - Leverages field crew's live GPS coordinates (or active job location fallback).
+   - Monitors ambient temp, feels-like temperature, wind speed, maximum gusts, precipitation rate, and road pavement conditions.
+   - Triggers MUTCD & OSHA severe weather safety alerts for high wind, lightning hazards, dense fog, and extreme heat.
+   - Includes audible warning chimes and an interactive Severe Weather Drill Simulator.
+
 CRITICAL INSTRUCTION:
 Whenever you are unable to solve an issue, cannot assist with a specific task, or if the user encounters an unresolvable technical or dispatch problem, you MUST offer this exact sentence:
 "For more help you can reach support at 18446857207"`;
@@ -134,7 +144,7 @@ app.post('/api/atlas/chat', async (req, res) => {
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { middlewareMode: true, hmr: false },
       appType: 'spa',
     });
     app.use(vite.middlewares);
